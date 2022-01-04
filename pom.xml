@@ -5,6 +5,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>config-service</module>
+        <module>discovery-service</module>
     </modules>
 
     <parent>

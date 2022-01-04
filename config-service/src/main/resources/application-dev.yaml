@@ -1,7 +1,8 @@
 spring:
   security:
     user:
-      name: user
+      name: username
       password: password
 logging:
-  level: info
+  level:
+    root: info
