@@ -1,1 +1,3 @@
-# spring-cloud-example-ping
+# Spring Cloud Example Ping
+
+Example project for Spring Cloud
