@@ -1,0 +1,15 @@
+version: '3.9'
+
+services: 
+    config:
+        build: config-service/.
+        hostname: config
+        container_name: config-service
+        ports: 
+            - 8888:8888
+        networks: 
+            - ping
+
+networks: 
+    ping:
+        name: ping-network

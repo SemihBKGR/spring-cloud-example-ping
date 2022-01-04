@@ -12,14 +12,23 @@
 
     <artifactId>config-service</artifactId>
 
+    <properties>
+        <final-jar-name>${artifactId}</final-jar-name>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-server</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
+        <finalName>${final-jar-name}</finalName>
         <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
     </build>
 
