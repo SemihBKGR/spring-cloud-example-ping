@@ -18,17 +18,6 @@ services:
       - ping
     depends_on:
       - config
-  auth:
-    build: auth-service/.
-    hostname: auth
-    container_name: authorization-server
-    ports:
-      - 8080:8080
-    networks:
-      - ping
-    depends_on:
-      - config
-      - eureka
   user:
     build: user-service/.
     hostname: user
@@ -40,21 +29,41 @@ services:
     depends_on:
       - config
       - eureka
-      - user-db
-  user-db:
-    image: mysql:5.7
-    hostname: userdb
-    container_name: mysql-server
+      - keycloak
+  postgres:
+    image: postgres:13.2
+    container_name: users-postgres
+    hostname: users
     environment:
-      MYSQL_DATABASE: 'user_db'
-      MYSQL_USER: 'user'
-      MYSQL_PASSWORD: 'password'
-      MYSQL_ROOT_PASSWORD: 'password'
+      POSTGRES_DB: users
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - 5432:5432
     networks:
       - ping
+  keycloak:
+    image: jboss/keycloak:latest
+    container_name: keycloak-server
+    hostname: keycloak
+    environment:
+      DB_VENDOR: postgres
+      DB_ADDR: postgres
+      DB_DATABASE: users
+      DB_USER: user
+      DB_PASSWORD: password
+      KEYCLOAK_USER: user
+      KEYCLOAK_PASSWORD: password
+    volumes:
+      - ./volumes/keycloak/imports:/opt/jboss/keycloak/imports
+    command:
+      - '-b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/realm-export.json'
     ports:
-      - 3306:3306
-
+      - 8080:8080
+    networks:
+      - ping
+    depends_on:
+      - postgres
 networks:
   ping:
     name: ping-network

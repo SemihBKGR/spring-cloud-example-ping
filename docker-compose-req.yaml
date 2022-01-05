@@ -1,18 +1,5 @@
 version: '3.9'
 services:
-  user-db:
-    image: mysql:5.7
-    hostname: userdb
-    container_name: mysql-server
-    environment:
-      MYSQL_DATABASE: 'user_db'
-      MYSQL_USER: 'user'
-      MYSQL_PASSWORD: 'password'
-      MYSQL_ROOT_PASSWORD: 'password'
-    networks:
-      - ping-only
-    ports:
-      - 3306:3306
   postgres:
     image: postgres:13.2
     container_name: users-postgres
@@ -37,8 +24,6 @@ services:
       DB_PASSWORD: password
       KEYCLOAK_USER: user
       KEYCLOAK_PASSWORD: password
-    depends_on:
-      - postgres
     volumes:
       - ./volumes/keycloak/imports:/opt/jboss/keycloak/imports
     command:
@@ -46,7 +31,9 @@ services:
     ports:
       - 8080:8080
     networks:
-      - pings
+      - ping-only
+    depends_on:
+      - postgres
 networks:
   ping-only:
     name: ping-only-network
