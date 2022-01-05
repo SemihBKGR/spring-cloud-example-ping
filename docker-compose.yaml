@@ -16,6 +16,8 @@ services:
       - 8761:8761
     networks:
       - ping
+    depends_on:
+      - config
   auth:
     build: auth-service/.
     hostname: auth
@@ -24,6 +26,35 @@ services:
       - 8080:8080
     networks:
       - ping
+    depends_on:
+      - config
+      - eureka
+  user:
+    build: user-service/.
+    hostname: user
+    container_name: user-server
+    ports:
+      - 9000:9000
+    networks:
+      - ping
+    depends_on:
+      - config
+      - eureka
+      - user-db
+  user-db:
+    image: mysql:5.7
+    hostname: userdb
+    container_name: mysql-server
+    environment:
+      MYSQL_DATABASE: 'user_db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    networks:
+      - ping
+    ports:
+      - 3306:3306
+
 networks:
   ping:
     name: ping-network
