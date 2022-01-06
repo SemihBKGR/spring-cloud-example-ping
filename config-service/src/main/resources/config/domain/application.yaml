@@ -17,7 +17,7 @@ eureka:
 keycloak:
   auth-server-url: http://localhost:8080/auth
   realm: ping
-  resource: user-service
+  resource: domain-service
   public-client: true
 keycloak-user:
   admin:

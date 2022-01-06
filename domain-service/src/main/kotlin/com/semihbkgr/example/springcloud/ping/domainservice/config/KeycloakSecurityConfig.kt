@@ -1,4 +1,4 @@
-package com.semihbkgr.example.springcloud.ping.userservice.config
+package com.semihbkgr.example.springcloud.ping.domainservice.config
 
 import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurerAdapter
 import org.springframework.beans.factory.annotation.Autowired
