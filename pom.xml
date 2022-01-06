@@ -13,6 +13,7 @@
         <module>gateway-service</module>
         <module>domain-service</module>
         <module>schedule-service</module>
+        <module>process-service</module>
     </modules>
 
     <parent>
