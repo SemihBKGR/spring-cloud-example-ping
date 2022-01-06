@@ -11,7 +11,7 @@ services:
     ports:
       - 5432:5432
     networks:
-      - ping-only
+      - ping-req
   keycloak:
     image: jboss/keycloak:latest
     container_name: keycloak-server
@@ -31,7 +31,7 @@ services:
     ports:
       - 8080:8080
     networks:
-      - ping-only
+      - ping-req
     depends_on:
       - postgres
   mongo:
@@ -42,11 +42,11 @@ services:
       MONGO_INITDB_ROOT_USERNAME: user
       MONGO_INITDB_ROOT_PASSWORD: password
     volumes:
-      - ./volumes/mongodb/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./volumes/mongo/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
     ports:
       - 27017:27017
     networks:
-      - ping
+      - ping-req
 networks:
-  ping-only:
-    name: ping-only-network
+  ping-req:
+    name: ping-req-network

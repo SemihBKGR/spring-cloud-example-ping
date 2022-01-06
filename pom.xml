@@ -66,11 +66,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>com.semihbkgr.example.springcloud.ping</groupId>
-                <artifactId>models</artifactId>
-                <version>${version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 

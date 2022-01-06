@@ -14,6 +14,7 @@
 
     <properties>
         <final-jar-name>${artifactId}</final-jar-name>
+        <models-jar-name>models-${parent.version}.jar</models-jar-name>
     </properties>
 
     <dependencies>
@@ -65,6 +66,18 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.semihbkgr.example.springcloud.ping</groupId>
+                <artifactId>models</artifactId>
+                <version>${parent.version}</version>
+                <scope>system</scope>
+                <systemPath>${project.basedir}/../models/target/${models-jar-name}</systemPath>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <finalName>${final-jar-name}</finalName>
