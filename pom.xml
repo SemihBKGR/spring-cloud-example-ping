@@ -11,6 +11,7 @@
         <module>user-service</module>
         <module>models</module>
         <module>gateway-service</module>
+        <module>domain-service</module>
     </modules>
 
     <parent>
