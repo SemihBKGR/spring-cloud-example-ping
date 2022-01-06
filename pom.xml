@@ -12,6 +12,7 @@
         <module>models</module>
         <module>gateway-service</module>
         <module>domain-service</module>
+        <module>schedule-service</module>
     </modules>
 
     <parent>

@@ -14,7 +14,3 @@ keycloak:
   realm: ping
   resource: user-service
   public-client: true
-keycloak-user:
-  admin:
-    username: user
-    password: password
