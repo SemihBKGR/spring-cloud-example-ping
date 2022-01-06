@@ -9,7 +9,11 @@ import org.springframework.data.mongodb.core.mapping.Document
 @Document("domains")
 data class Domain(
     @Id val id: String,
-    val url: String,
-    @CreatedBy @Indexed var owner: String? = null,
-    @CreatedDate var creationTime: Long? = null
+    @Indexed(unique = true) val url: String,
+    var name: String?,
+    var description: String?,
+    var enabled: Boolean,
+    var processTimeInterval: Long,
+    @CreatedBy var owner: String,
+    @CreatedDate var creationTime: Long
 )
