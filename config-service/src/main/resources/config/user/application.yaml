@@ -1,5 +1,14 @@
 server:
   port: 9000
+spring:
+  r2dbc:
+    url: r2dbc:pool:postgresql://localhost:5432/users
+    username: user
+    password: password
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
 keycloak:
   auth-server-url: http://localhost:8080/auth
   realm: ping
@@ -9,7 +18,3 @@ keycloak-user:
   admin:
     username: user
     password: password
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
