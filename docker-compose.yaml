@@ -18,6 +18,17 @@ services:
       - ping
     depends_on:
       - config
+  gateway:
+    build: gateway-service/.
+    hostname: gateway
+    container_name: gateway-server
+    ports:
+      - 8000:8000
+    -networks:
+      - ping
+    depends_on:
+      - config
+      - eureka
   user:
     build: user-service/.
     hostname: user
@@ -32,8 +43,8 @@ services:
       - keycloak
   postgres:
     image: postgres:13.2
-    container_name: users-postgres
-    hostname: users
+    container_name: postgres
+    hostname: postgres
     environment:
       POSTGRES_DB: users
       POSTGRES_USER: user
@@ -64,6 +75,19 @@ services:
       - ping
     depends_on:
       - postgres
+  mongo:
+    image: mongo:latest
+    hostname: mongo
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - ./volumes/mongodb/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    ports:
+      - 27017:27017
+    networks:
+      - ping
 networks:
   ping:
     name: ping-network

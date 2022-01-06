@@ -4,6 +4,7 @@ Example project for Spring Cloud
 
 Services
 
-- auth
 - config
 - discovery
+- gateway
+- user
