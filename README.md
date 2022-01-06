@@ -8,3 +8,7 @@ Services
 - discovery
 - gateway
 - user
+- domain
+- schedule
+- process
+- log

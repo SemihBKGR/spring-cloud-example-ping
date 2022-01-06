@@ -13,7 +13,7 @@
     <artifactId>discovery-service</artifactId>
 
     <properties>
-        <final-jar-name>${artifactId}</final-jar-name>
+        <final-jar-name>${project.artifactId}</final-jar-name>
     </properties>
 
     <dependencies>

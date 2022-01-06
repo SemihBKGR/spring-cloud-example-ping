@@ -53,6 +53,22 @@ services:
       - config
       - eureka
       - mongo
+  schedule:
+    build: schedule-service/.
+    container_name: schedule-server
+    networks:
+      - ping
+    depends_on:
+      - config
+      - mongo
+      - eureka
+  process:
+    build: process-service/.
+    container_name: process-server
+    networks:
+      - ping
+    depends_on:
+      - config
   postgres:
     image: postgres:13.2
     container_name: postgres
