@@ -1,5 +1,3 @@
-server:
-  port: 9010
 spring:
   data:
     mongodb:
@@ -10,8 +8,16 @@ spring:
       password: password
       authentication-database: admin
       auto-index-creation: true
+  kafka:
+    producer:
+      bootstrap-server: localhost:29092
+      topic:
+        schedule:
+          name: schedule
+          partitions: 1
+          replication-factor: 1
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-      register-with-eureka: false
+    register-with-eureka: false

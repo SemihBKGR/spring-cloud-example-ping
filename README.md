@@ -11,4 +11,12 @@ Services
 - domain
 - schedule
 - process
-- log
+
+Tech Stack
+
+Language : Kotlin\
+Framework: Spring\
+Database: Postgres, Mongo\
+Message broker: Kafka\
+Service discovery: Eureka\
+UAA: Keycloak\

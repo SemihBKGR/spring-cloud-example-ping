@@ -19,6 +19,8 @@ class KeycloakSecurityConfig : KeycloakWebSecurityConfigurerAdapter() {
     override fun configure(http: HttpSecurity) {
         super.configure(http)
         http.authorizeRequests()
+            .antMatchers("/domain/_")
+            .permitAll()
             .anyRequest()
             .authenticated()
             .and()
