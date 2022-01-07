@@ -10,6 +10,10 @@ db.createUser(
             {
                 role: "readWrite",
                 db: "schedules"
+            },
+            {
+                role: "readWrite",
+                db: "communications"
             }
         ]
     }

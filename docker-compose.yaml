@@ -53,6 +53,18 @@ services:
       - config
       - eureka
       - mongo
+  communication:
+    build: communication-service/.
+    hostname: communication
+    container_name: communication-server
+    ports:
+      - 9020:9020
+    networks:
+      - ping
+    depends_on:
+      - config
+      - eureka
+      - mongo
   schedule:
     build: schedule-service/.
     container_name: schedule-server
