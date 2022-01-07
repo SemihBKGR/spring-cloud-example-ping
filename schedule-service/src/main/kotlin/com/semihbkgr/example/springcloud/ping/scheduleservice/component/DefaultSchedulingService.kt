@@ -45,9 +45,11 @@ class DefaultSchedulingService(
             .forEach { domain ->
                 log.info("${domain}, ${Thread.currentThread().name}")
                 var schedule = scheduleService.findById(domain.id)
-                if (schedule != null && domain.processTimeInterval <= currentTime - schedule.lastProcessTime)
+                if (schedule != null) {
+                    if (domain.processTimeInterval > currentTime - schedule.lastProcessTime)
+                        return@forEach
                     schedule.lastProcessTime = currentTime
-                else
+                } else
                     schedule = Schedule(domain.id, currentTime)
                 kafkaTemplate.send("schedule", domain.id, domain.url)
                 scheduleService.save(schedule)
