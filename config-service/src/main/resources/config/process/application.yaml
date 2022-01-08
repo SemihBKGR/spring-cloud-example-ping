@@ -3,3 +3,8 @@ spring:
     consumer:
       bootstrap-server: localhost:29092
       group-id: process
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: false

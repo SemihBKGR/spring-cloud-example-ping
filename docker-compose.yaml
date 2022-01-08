@@ -65,6 +65,16 @@ services:
       - config
       - eureka
       - mongo
+  track:
+    build: track-service/.
+    hostname: track
+    container_name: track-server
+    ports:
+      - 9030:9030
+    depends_on:
+      - config
+      - eureka
+      - mongo
   schedule:
     build: schedule-service/.
     container_name: schedule-server
@@ -74,6 +84,8 @@ services:
       - config
       - mongo
       - eureka
+      - kafka
+      - domain
   process:
     build: process-service/.
     container_name: process-server
@@ -81,6 +93,8 @@ services:
       - ping
     depends_on:
       - config
+      - eureka
+      - kafka
   postgres:
     image: postgres:13.2
     container_name: postgres

@@ -14,6 +14,10 @@ db.createUser(
             {
                 role: "readWrite",
                 db: "communications"
+            },
+            {
+                role: "readWrite",
+                db: "tracks"
             }
         ]
     }
