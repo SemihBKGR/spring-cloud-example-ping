@@ -1,11 +1,12 @@
 package com.semihbkgr.example.springcloud.ping.models
 
+import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
-import org.springframework.data.mongodb.core.mapping.Field
 
 @Document("schedules")
-class Schedule(
-    @Id var domain: String,
-    var lastProcessTime: Long
+data class Schedule @JsonCreator constructor(
+    @Id @JsonProperty("domain") var domain: String,
+    @JsonProperty("lastProcessTime") var lastProcessTime: Long
 )

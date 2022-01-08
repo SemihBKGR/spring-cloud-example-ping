@@ -1,7 +1,7 @@
 package com.semihbkgr.example.springcloud.ping.scheduleservice.component
 
-interface SchedulingService {
+interface DomainScheduler {
 
-    fun start()
+    fun scheduleDomains()
 
 }

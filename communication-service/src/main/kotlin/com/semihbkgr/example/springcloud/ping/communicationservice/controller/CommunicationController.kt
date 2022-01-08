@@ -1,5 +1,6 @@
 package com.semihbkgr.example.springcloud.ping.communicationservice.controller
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.semihbkgr.example.springcloud.ping.communicationservice.client.DomainClient
 import com.semihbkgr.example.springcloud.ping.communicationservice.service.CommunicationService
 import com.semihbkgr.example.springcloud.ping.models.Communication
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/communication")
 class CommunicationController(
-    val domainClient: DomainClient,
+    @JsonProperty val domainClient: DomainClient,
     val communicationService: CommunicationService
 ) {
 

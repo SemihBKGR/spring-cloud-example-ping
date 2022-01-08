@@ -13,17 +13,17 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 
 @Component
-class DefaultSchedulingService(
+class DefaultDomainScheduler(
     val domainClient: DomainClient,
     val scheduleService: ScheduleService,
     val kafkaTemplate: KafkaTemplate<String, String>
 ) :
-    SchedulingService {
+    DomainScheduler {
 
     companion object {
 
         @JvmStatic
-        val log: Logger = LoggerFactory.getLogger(DefaultSchedulingService::class.java)
+        val log: Logger = LoggerFactory.getLogger(DefaultDomainScheduler::class.java)
 
         @JvmStatic
         val page: AtomicInteger = AtomicInteger(0)
@@ -31,19 +31,19 @@ class DefaultSchedulingService(
     }
 
     @Async
-    @Scheduled(fixedRate = 1000, timeUnit = TimeUnit.MILLISECONDS)
-    override fun start() {
+    @Scheduled(fixedRate = 5000, timeUnit = TimeUnit.MILLISECONDS)
+    override fun scheduleDomains() {
         log.info("Starting")
         val domainList = domainClient.getAll(page.getAndIncrement().toUInt(), 100.toUInt())
         log.info("Domains - page: ${page.get()}, size: ${domainList.size}")
         if (domainList.isEmpty()) {
             page.set(0)
+            log.info("Page count set as '0'")
             return
         }
         val currentTime = System.currentTimeMillis()
         domainList.parallelStream()
             .forEach { domain ->
-                log.info("${domain}, ${Thread.currentThread().name}")
                 var schedule = scheduleService.findById(domain.id)
                 if (schedule != null) {
                     if (domain.processTimeInterval > currentTime - schedule.lastProcessTime)
