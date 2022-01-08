@@ -6,6 +6,6 @@ import org.springframework.data.mongodb.core.mapping.Field
 
 @Document("schedules")
 class Schedule(
-    @Id @Field(name = "domain_id") val domainId: String,
+    @Id var domain: String,
     var lastProcessTime: Long
 )

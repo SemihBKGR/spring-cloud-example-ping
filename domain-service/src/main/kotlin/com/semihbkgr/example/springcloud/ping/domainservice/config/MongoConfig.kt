@@ -1,10 +1,8 @@
 package com.semihbkgr.example.springcloud.ping.domainservice.config
 
 import org.springframework.context.annotation.Configuration
-import org.springframework.data.mongodb.config.EnableReactiveMongoAuditing
-import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories
 
 @Configuration
-@EnableReactiveMongoAuditing
-@EnableReactiveMongoRepositories(basePackages = ["com.semihbkgr.example.springcloud.ping.domainservice.repository"])
+@EnableMongoRepositories(basePackages = ["com.semihbkgr.example.springcloud.ping.domainservice.repository"])
 class MongoConfig

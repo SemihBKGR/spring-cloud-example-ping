@@ -6,6 +6,6 @@ import org.springframework.data.mongodb.core.mapping.Field
 
 @Document("communications")
 data class Communication(
-    @Id @Field("domain_id") val domainId: String,
-    val emails: List<String>
+    @Id var domain: String,
+    var emails: List<String>
 )
