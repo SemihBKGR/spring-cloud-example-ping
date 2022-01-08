@@ -15,6 +15,7 @@
         <module>schedule-service</module>
         <module>process-service</module>
         <module>communication-service</module>
+        <module>track-service</module>
     </modules>
 
     <parent>
