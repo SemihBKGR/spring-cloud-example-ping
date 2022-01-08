@@ -22,6 +22,10 @@
             <artifactId>spring-kafka</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.semihbkgr.example.springcloud.ping</groupId>
+            <artifactId>models</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
@@ -40,6 +44,18 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.semihbkgr.example.springcloud.ping</groupId>
+                <artifactId>models</artifactId>
+                <version>${parent.version}</version>
+                <scope>system</scope>
+                <systemPath>${project.basedir}/../models/target/${models-jar-name}</systemPath>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <finalName>${final-jar-name}</finalName>

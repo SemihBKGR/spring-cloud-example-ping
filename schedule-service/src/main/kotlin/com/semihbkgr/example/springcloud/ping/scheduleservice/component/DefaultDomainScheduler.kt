@@ -33,12 +33,11 @@ class DefaultDomainScheduler(
     @Async
     @Scheduled(fixedRate = 5000, timeUnit = TimeUnit.MILLISECONDS)
     override fun scheduleDomains() {
-        log.info("Starting")
         val domainList = domainClient.getAll(page.getAndIncrement().toUInt(), 100.toUInt())
         log.info("Domains - page: ${page.get()}, size: ${domainList.size}")
         if (domainList.isEmpty()) {
             page.set(0)
-            log.info("Page count set as '0'")
+            log.info("Page count set its beginning value")
             return
         }
         val currentTime = System.currentTimeMillis()
