@@ -15,8 +15,6 @@ class TrackController(val trackService: TrackService) {
     fun addMetric(
         @PathVariable("domain") domain: String,
         @RequestBody metric: Metric
-    ) {
-        trackService.addMetric(domain, metric)
-    }
+    ) = trackService.addMetric(domain, metric)
 
 }

@@ -9,6 +9,6 @@ class TrackServiceImpl(val trackRepository: TrackRepository) : TrackService {
 
     override fun findById(id: String) = trackRepository.findById(id)
 
-    override fun addMetric(id: String, metric: Metric) = println(id)
+    override fun addMetric(id: String, metric: Metric) = trackRepository.addMetric(id, metric)
 
 }

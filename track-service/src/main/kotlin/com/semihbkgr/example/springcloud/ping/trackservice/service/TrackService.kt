@@ -8,6 +8,6 @@ interface TrackService {
 
     fun findById(id: String): Mono<Track>
 
-    fun addMetric(id: String, metric: Metric)
+    fun addMetric(id: String, metric: Metric): Mono<Unit>
 
 }
