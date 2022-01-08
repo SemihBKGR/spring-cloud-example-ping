@@ -22,7 +22,7 @@ class ScheduleListener(val scheduleProcessor: ScheduleProcessor) {
         @Header(KafkaHeaders.RECEIVED_PARTITION_ID) partition: Int
     ) {
         log.info("ScheduleListener - id: $key, url: $message")
-        val metricMessage = scheduleProcessor.send(key, message)
-
+        val metric = scheduleProcessor.send(message)
+        
     }
 }
