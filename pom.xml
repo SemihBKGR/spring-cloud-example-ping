@@ -16,6 +16,7 @@
         <module>process-service</module>
         <module>communication-service</module>
         <module>track-service</module>
+        <module>email-service</module>
     </modules>
 
     <parent>
