@@ -95,6 +95,14 @@ services:
       - config
       - eureka
       - kafka
+  email:
+    build: email-service/.
+    container_name: email-server
+    networks:
+      - ping
+    depends_on:
+      - config
+      - kafka
   postgres:
     image: postgres:13.2
     container_name: postgres
