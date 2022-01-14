@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "gateway.hostname",
+      "type": "java.lang.String",
+      "description": "Hostname of gateway service."
+    },
+    {
+      "name": "gateway.port",
+      "type": "java.lang.String",
+      "description": "Post of gateway service."
+    }
+  ]
+}

@@ -103,6 +103,13 @@ services:
     depends_on:
       - config
       - kafka
+  ui:
+    build: ui-server/.
+    container_name: ui-server
+    networks:
+      - ping
+    depends_on:
+      - gateway
   postgres:
     image: postgres:13.2
     container_name: postgres
