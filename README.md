@@ -1,4 +1,4 @@
-# Spring Cloud Example Ping
+# Spring Cloud Ping
 
 Example project for Spring Cloud
 
