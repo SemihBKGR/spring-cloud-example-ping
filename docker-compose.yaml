@@ -5,7 +5,7 @@ services:
     hostname: config
     container_name: config-server
     ports:
-      - 8888:8888
+      - "8888:8888"
     networks:
       - ping
   eureka:
@@ -13,7 +13,7 @@ services:
     hostname: discovery
     container_name: eureka-server
     ports:
-      - 8761:8761
+      - "8761:8761"
     networks:
       - ping
     depends_on:
@@ -23,8 +23,8 @@ services:
     hostname: gateway
     container_name: gateway-server
     ports:
-      - 8000:8000
-    -networks:
+      - "8000:8000"
+    networks:
       - ping
     depends_on:
       - config
@@ -34,7 +34,7 @@ services:
     hostname: user
     container_name: user-server
     ports:
-      - 9000:9000
+      - "9000:9000"
     networks:
       - ping
     depends_on:
@@ -46,7 +46,7 @@ services:
     hostname: domain
     container_name: domain-server
     ports:
-      - 9010:9010
+      - "9010:9010"
     networks:
       - ping
     depends_on:
@@ -58,7 +58,7 @@ services:
     hostname: communication
     container_name: communication-server
     ports:
-      - 9020:9020
+      - "9020:9020"
     networks:
       - ping
     depends_on:
@@ -70,7 +70,7 @@ services:
     hostname: track
     container_name: track-server
     ports:
-      - 9030:9030
+      - "9030:9030"
     depends_on:
       - config
       - eureka
@@ -119,7 +119,7 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
     ports:
-      - 5432:5432
+      - "5432:5432"
     networks:
       - ping
   keycloak:
@@ -139,7 +139,7 @@ services:
     command:
       - '-b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/realm-export.json'
     ports:
-      - 8080:8080
+      - "8080:8080"
     networks:
       - ping
     depends_on:
@@ -154,7 +154,7 @@ services:
     volumes:
       - /volumes/mongo/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
     ports:
-      - 27017:27017
+      - "27017:27017"
     networks:
       - ping
   zookeeper:
@@ -165,9 +165,9 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
     ports:
-      - 2181:2181
+      - "2181:2181"
     networks:
-      - ping-req
+      - ping
   kafka:
     image: confluentinc/cp-kafka:latest
     hostname: kafka
@@ -182,9 +182,21 @@ services:
     depends_on:
       - zookeeper
     ports:
-      - 29092:29092
+      - "29092:29092"
     networks:
-      - ping-req
+      - ping
+  prometheus:
+    image: prom/prometheus
+    hostname: prometheus
+    container_name: prometheus-server
+    volumes:
+      - ./volumes/prometheus:/etc/prometheus/
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yaml'
+    ports:
+      - "9090:9090"
+    networks:
+      - ping
 networks:
   ping:
     name: ping-network

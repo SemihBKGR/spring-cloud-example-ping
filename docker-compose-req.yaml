@@ -1,21 +1,22 @@
 version: '3.9'
+
 services:
   postgres:
     image: postgres:13.2
-    container_name: postgresql
     hostname: postgres
+    container_name: postgresql
     environment:
       POSTGRES_DB: users
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
     ports:
-      - 5432:5432
+      - "5432:5432"
     networks:
       - ping-req
   keycloak:
     image: jboss/keycloak:latest
-    container_name: keycloak-server
     hostname: keycloak
+    container_name: keycloak-server
     environment:
       DB_VENDOR: postgres
       DB_ADDR: postgres
@@ -31,7 +32,7 @@ services:
     depends_on:
       - postgres
     ports:
-      - 8080:8080
+      - "8080:8080"
     networks:
       - ping-req
   mongo:
@@ -44,7 +45,7 @@ services:
     volumes:
       - ./volumes/mongo/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
     ports:
-      - 27017:27017
+      - "27017:27017"
     networks:
       - ping-req
   zookeeper:
@@ -55,7 +56,7 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
     ports:
-      - 2181:2181
+      - "2181:2181"
     networks:
       - ping-req
   kafka:
@@ -72,9 +73,22 @@ services:
     depends_on:
       - zookeeper
     ports:
-      - 29092:29092
+      - "29092:29092"
     networks:
       - ping-req
+  prometheus:
+    image: prom/prometheus
+    hostname: prometheus
+    container_name: prometheus-server
+    volumes:
+      - ./volumes/prometheus:/etc/prometheus/
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yaml'
+    ports:
+      - "9090:9090"
+    networks:
+      - ping-req
+
 networks:
   ping-req:
     name: ping-req-network
